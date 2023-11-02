@@ -17,13 +17,10 @@ public class BookController {
     @Autowired
     private BookService bookService;
 
-    // Retrieve all books
     @GetMapping
     public List<Book> getAllBooks() {
         return bookService.getAllBooks();
     }
-
-    // Retrieve a book by ID
     @GetMapping("/{id}")
     public ResponseEntity<Book> getBookById(@PathVariable Long id) {
         Book book = bookService.getBookById(id);
@@ -34,14 +31,12 @@ public class BookController {
         }
     }
 
-    // Create a new book
     @PostMapping
     public ResponseEntity<Book> createBook(@RequestBody Book book) {
         Book createdBook = bookService.createBook(book);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdBook);
     }
 
-    // Update a book by ID
     @PutMapping("/{id}")
     public ResponseEntity<Book> updateBook(@PathVariable Long id, @RequestBody Book updatedBook) {
         Book book = bookService.updateBook(id, updatedBook);
@@ -52,7 +47,6 @@ public class BookController {
         }
     }
 
-    // Delete a book by ID
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteBook(@PathVariable Long id) {
         bookService.deleteBook(id);

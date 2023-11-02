@@ -3,6 +3,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import jakarta.persistence.*;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 public class User {
@@ -14,7 +17,7 @@ public class User {
     @Column(unique = true)
     private String username;
 
-    private String password; // Hashed password
+    private String password;
 
     private String fullName;
 
@@ -23,6 +26,13 @@ public class User {
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateRegistered;
+
+    @ManyToMany
+    @JoinTable(name = "user_books",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "book_id"))
+    private Set<Book> books = new HashSet<>();
+
     public Long getId() {
         return id;
     }
@@ -44,7 +54,6 @@ public class User {
     }
 
     public void setPassword(String password) {
-        // Hash the password before setting it
         this.password = new BCryptPasswordEncoder().encode(password);
     }
 
@@ -71,4 +80,13 @@ public class User {
     public void setDateRegistered(Date dateRegistered) {
         this.dateRegistered = dateRegistered;
     }
+
+    public Set<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(Set<Book> books) {
+        this.books = books;
+    }
+
 }

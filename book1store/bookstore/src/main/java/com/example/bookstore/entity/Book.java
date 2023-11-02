@@ -1,9 +1,6 @@
 package com.example.bookstore.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Book {
@@ -14,6 +11,11 @@ public class Book {
     private String title;
     private String author;
     private String description;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id") // This defines the foreign key column in the Book table
+    private User owner;
+
 
     // Getter and Setter methods
     public Long getId() {

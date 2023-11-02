@@ -8,10 +8,10 @@ import java.security.Key;
 
 @Configuration
 public class JwtConfig {
-    // Define your token secret key (Keep it secure!)
-    private final String secret = "YourSecretKey"; // Change this to a secure secret key
 
-    // Define the token expiration time (e.g., 1 hour)
+    private final String secret = ""; //
+
+
     private final long expirationTime = 3600000;
 
     @Bean
